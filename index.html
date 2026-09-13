@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en" data-theme="day">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Adam</title>
+<script>
+// The reader's theme, applied before the first paint; the same key the site keeps.
+try { var t = localStorage.getItem("theme"); if (t) document.documentElement.setAttribute("data-theme", t); } catch (e) {}
+</script>
+<style>
+/* The four themes, the site's own. */
+:root, :root[data-theme="day"] {
+  --bg: #151515; --panel: #1d1d1d; --panel2: #252525; --border: #363b42;
+  --comment: #888b90; --text: #b9bec4; --emphasis: #cfd5db; --strong: #e2e6ea;
+  --keyword: #be89cb; --name: #8199d6; --type: #cfaa5a; --number: #cf936b; --string: #86bb6d; --const: #65bbb4;
+  --label: #b08db8; --pink: #cda1d8; --arrow: #65bbb4; --warn: #cf936b; color-scheme: dark;
+}
+:root[data-theme="night"] {
+  --bg: #0b0c15; --panel: #11131e; --panel2: #191b27; --border: #252a3a;
+  --comment: #7a8294; --text: #aab4ca; --emphasis: #c4ccde; --strong: #dbe0eb;
+  --keyword: #bd88cd; --name: #849bd8; --type: #c9a461; --number: #cc9371; --string: #84b874; --const: #65b9ae;
+  --label: #ac8cbf; --pink: #caa4d7; --arrow: #65b9ae; --warn: #cc9371; color-scheme: dark;
+}
+:root[data-theme="light"] {
+  --bg: #dfd6c4; --panel: #d5c9b2; --panel2: #cdc1ab; --border: #bdae92;
+  --comment: #696359; --text: #37322b; --emphasis: #28241d; --strong: #1a1713;
+  --keyword: #763376; --name: #284f8e; --type: #6b4e0e; --number: #7e4318; --string: #345b27; --const: #0d5d50;
+  --label: #643786; --pink: #592159; --arrow: #0d5d50; --warn: #7e4318; color-scheme: light;
+}
+:root[data-theme="green"] {
+  --bg: #001100; --panel: #003300; --panel2: #003b00; --border: #005500;
+  --comment: #009800; --text: #00d200; --emphasis: #00e800; --strong: #00ff00;
+  --keyword: #00d200; --name: #00bc00; --type: #00a600; --number: #00bc00; --string: #00d200; --const: #009000;
+  --label: #009000; --pink: #00d200; --arrow: #009000; --warn: #00bc00; color-scheme: dark;
+}
+html, body { margin: 0; min-height: 100%; background: var(--bg); color: var(--text); }
+body { font: 16px/1.7 "Figtree", "Lexend", "Montserrat", "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif; display: flex; flex-direction: column; min-height: 100vh; }
+.menubar { display: flex; justify-content: space-between; align-items: center; padding: 10px 16px; border-bottom: 1px solid var(--border); background: var(--panel); }
+.brand { color: var(--comment); font-weight: 600; } .brand small { font-weight: 400; margin-left: .5em; }
+.themes { display: flex; gap: 6px; } .themes button { font: inherit; font-size: 13px; color: var(--comment); background: none; border: 1px solid transparent; border-radius: 4px; padding: 2px 8px; cursor: pointer; }
+.themes button:hover, .themes button[aria-checked="true"] { color: var(--text); background: var(--panel2); border-color: var(--border); }
+main { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 48px 20px; gap: 28px; }
+.verse { font-family: "Noto Kufi Arabic", sans-serif; font-size: 1.6em; line-height: 2; color: var(--strong); max-width: 30em; }
+h1 { margin: 0; font-size: 2.4em; font-weight: 600; color: var(--strong); letter-spacing: .02em; }
+h1 small { display: block; font-size: .45em; font-weight: 400; color: var(--comment); margin-top: .2em; }
+.note { color: var(--emphasis); max-width: 34em; margin: 0; } .note b { color: var(--const); font-weight: 600; }
+.ack { color: var(--comment); font-size: .95em; max-width: 36em; margin: 0; }
+footer { color: var(--comment); font-size: 13px; text-align: center; padding: 18px; border-top: 1px solid var(--border); }
+</style>
+</head>
+<body>
+<header class="menubar">
+  <span class="brand">Adam <small>v0.9.9</small></span>
+  <nav class="themes" aria-label="theme">
+    <button type="button" role="menuitemradio" data-theme="day">day</button>
+    <button type="button" role="menuitemradio" data-theme="night">night</button>
+    <button type="button" role="menuitemradio" data-theme="light">light</button>
+    <button type="button" role="menuitemradio" data-theme="green">green</button>
+  </nav>
+</header>
+<main>
+  <p class="verse" lang="ar" dir="rtl">قَالُوا سُبْحَانَكَ لَا عِلْمَ لَنَا إِلَّا مَا عَلَّمْتَنَا إِنَّكَ أَنْتَ الْعَلِيمُ الْحَكِيمُ</p>
+  <h1>Adam<small>a programming language</small></h1>
+  <p class="note"><b>Under construction.</b> The page is being rewritten and will return, God willing.</p>
+  <p class="ack">Anything achieved correctly here was by the grace of God; the shortcomings are the author's own.</p>
+</main>
+<footer>© 2026 Talal Alobaid. All rights reserved.</footer>
+<script>
+(function () {
+  var root = document.documentElement, items = document.querySelectorAll('.themes button');
+  function show() { var now = root.getAttribute('data-theme') || 'day'; items.forEach(function (b) { b.setAttribute('aria-checked', String(b.getAttribute('data-theme') === now)); }); }
+  items.forEach(function (b) { b.addEventListener('click', function () { var t = b.getAttribute('data-theme'); root.setAttribute('data-theme', t); try { localStorage.setItem('theme', t); } catch (e) {} show(); }); });
+  show();
+})();
+</script>
+</body>
+</html>
